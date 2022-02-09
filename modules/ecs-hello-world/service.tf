@@ -48,10 +48,10 @@ resource "aws_security_group" "load_balancer" {
     ipv6_cidr_blocks = ["::/0"]
   }
   ingress {
-    from_port        = 5000
-    to_port          = 5000
-    protocol         = "tcp"
-    self             = true
+    from_port = 5000
+    to_port   = 5000
+    protocol  = "tcp"
+    self      = true
   }
 
   egress {

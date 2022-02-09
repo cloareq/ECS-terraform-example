@@ -24,11 +24,11 @@ variable "vpc_id" {
 }
 
 variable "public_subnets_id" {
-  type        = list
+  type        = list(any)
   description = "public subnets id list"
 }
 
 variable "private_subnets_id" {
-  type        = list
+  type        = list(any)
   description = "private subnets id list"
 }

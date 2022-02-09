@@ -1,5 +1,5 @@
 module "iam" {
   source = "../modules/iam"
 
-  environment        = local.environment
+  environment = local.environment
 }

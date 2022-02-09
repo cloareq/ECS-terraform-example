@@ -4,21 +4,21 @@ variable "environment" {
 }
 
 variable "cidr_block" {
-  type = string
+  type        = string
   description = "CIDR Block"
 }
 
 variable "private_subnets" {
-  type        = list
+  type        = list(any)
   description = "VPC private subnets list"
 }
 
 variable "public_subnets" {
-  type        = list
+  type        = list(any)
   description = "VPC public subnets list"
 }
 
 variable "availability_zones" {
-    type = list
-    description = "AWS Availability zones list"
+  type        = list(any)
+  description = "AWS Availability zones list"
 }

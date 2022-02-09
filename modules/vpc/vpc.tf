@@ -75,7 +75,7 @@ resource "aws_nat_gateway" "nat_gateway" {
 }
 
 resource "aws_route_table" "private" {
-  count = length(var.private_subnets)
+  count  = length(var.private_subnets)
   vpc_id = aws_vpc.aws-vpc.id
 
   tags = {
