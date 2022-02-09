@@ -1,0 +1,13 @@
+.DS_Store
+.terraform
+terraform.tfstate.*
+terraform.tfstate
+.terraform.lock.hcl
+
+# vim temp files
+*.swp
+*.swo
+
+# Skip files with secrets in
+sensitive.auto.tfvars
+errored.tfstate
