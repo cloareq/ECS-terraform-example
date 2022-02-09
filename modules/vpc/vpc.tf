@@ -1,5 +1,5 @@
 resource "aws_vpc" "aws-vpc" {
-  cidr_block           = "10.10.0.0/16"
+  cidr_block           = var.cidr_block
   enable_dns_hostnames = true
   enable_dns_support   = true
   tags = {
@@ -61,4 +61,37 @@ resource "aws_route_table_association" "public" {
   count          = length(var.public_subnets)
   subnet_id      = element(aws_subnet.public.*.id, count.index)
   route_table_id = aws_route_table.public.id
+}
+
+resource "aws_eip" "nat_gateway" {
+  count = length(var.private_subnets)
+  vpc   = true
+}
+
+resource "aws_nat_gateway" "nat_gateway" {
+  count         = length(var.private_subnets)
+  allocation_id = aws_eip.nat_gateway[count.index].id
+  subnet_id     = aws_subnet.public[count.index].id
+}
+
+resource "aws_route_table" "private" {
+  count = length(var.private_subnets)
+  vpc_id = aws_vpc.aws-vpc.id
+
+  tags = {
+    Environment = var.environment
+  }
+}
+
+resource "aws_route" "private_nat_gateway" {
+  count                  = length(var.private_subnets)
+  route_table_id         = aws_route_table.private[count.index].id
+  destination_cidr_block = "0.0.0.0/0"
+  nat_gateway_id         = aws_nat_gateway.nat_gateway[count.index].id
+}
+
+resource "aws_route_table_association" "private" {
+  count          = length(var.private_subnets)
+  subnet_id      = aws_subnet.private[count.index].id
+  route_table_id = aws_route_table.private[count.index].id
 }

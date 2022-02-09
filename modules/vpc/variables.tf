@@ -3,6 +3,11 @@ variable "environment" {
   description = "AWS Environment"
 }
 
+variable "cidr_block" {
+  type = string
+  description = "CIDR Block"
+}
+
 variable "private_subnets" {
   type        = list
   description = "VPC private subnets list"
