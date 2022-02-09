@@ -13,12 +13,12 @@ resource "aws_ecs_task_definition" "aws-ecs-task" {
       ],
       "portMappings": [
         {
-          "containerPort": 5000,
-          "hostPort": 5000
+          "containerPort": ${var.container_port},
+          "hostPort": ${var.container_port}
         }
       ],
-      "cpu": 256,
-      "memory": 512,
+      "cpu": ${var.fargate_cpu},
+      "memory": ${var.fargate_memory},
       "networkMode": "awsvpc"
     }
   ]
@@ -26,8 +26,8 @@ resource "aws_ecs_task_definition" "aws-ecs-task" {
 
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"
-  memory                   = "512"
-  cpu                      = "256"
+  memory                   = var.fargate_memory
+  cpu                      = var.fargate_cpu
   execution_role_arn       = var.iam_role
   task_role_arn            = var.iam_role
 

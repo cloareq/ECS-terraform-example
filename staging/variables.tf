@@ -7,4 +7,7 @@ locals {
   public_subnets     = ["10.10.10.0/24", "10.10.11.0/24", "10.10.12.0/24"]
   app_name           = "hello-world"
   app_image          = "digitalocean/flask-helloworld"
+  fargate_memory     = "512"
+  fargate_cpu        = "256"
+  container_port     = 5000
 }

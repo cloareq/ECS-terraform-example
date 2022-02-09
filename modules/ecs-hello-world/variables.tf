@@ -32,3 +32,18 @@ variable "private_subnets_id" {
   type        = list(any)
   description = "private subnets id list"
 }
+
+variable "fargate_cpu" {
+  type        = string
+  description = "Fargate CPU units"
+}
+
+variable "fargate_memory" {
+  type        = string
+  description = "Fargate memory"
+}
+
+variable "container_port" {
+  type        = number
+  description = "App container port"
+}
